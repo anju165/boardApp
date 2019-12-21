@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit  Posts | {{block.super}}
+{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item">
+    <a href="{% url 'index' %}">Boards</a>
+</li>
+<li class="breadcrumb-item">
+    <a href="{% url 'topic' post.topic.board.pk %}">{{ post.topic.board.name}}</a>
+</li>
+<li class="breadcrumb-item">
+    <a href="{% url 'topics_posts' post.topic.board.pk post.topic.pk %}">{{post.topic.subject}}</a>
+</li>
+<li class="breadcrumb-item active">Edit Post</li>
+{% endblock %} 
+
+{% block content %}
+
+<form method="POST" class='mb-4'>
+    {% csrf_token %}
+    {% include 'includes/forms.html' %}
+    <button type="submit" class="btn btn-success">Save changes</button>
+    <a class="btn btn-secondary" href="{% url 'topics_posts' post.topic.board.pk post.topic.pk post.pk %}">Cancel</a>
+</form>
+
+{% endblock %}

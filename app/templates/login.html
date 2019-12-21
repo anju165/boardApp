@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} SignUp | {{block.super}} {% endblock %} 
+
+{% block breadcrumb %}
+<li class="breadcrumb-item">
+    <a href="{% url 'index' %}">Boards</a>
+</li>
+<li class="breadcrumb-item active">Login</li>
+{% endblock %} 
+
+{% block content %}
+
+<section id="signup">
+    <div class="row justify-content-center">
+        <div class="col-5">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Login Now</h2>
+                    <form method='post'>
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{next}}">
+                        {% include 'includes/forms.html' %}
+                        <button type="submit" class="btn btn-danger w-100">Login</button>
+                    </form>
+                </div>
+                <div class="card-footer text-muted text-center">
+                    <p>Not Registered ? <a href="{% url 'signup' %}">Register Now</a></p>
+                    <button type="submit" class="btn btn-primary mb-2" >
+                        <a href="{% url 'social:begin' 'facebook' %}" style="color: white;" >Login with Facebook</a>
+                    </button>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="{% url 'reset' %}">Forget Password ?</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
